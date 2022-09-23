@@ -49,7 +49,7 @@ wait_for_job <- function(slr_job) {
         paste('test -z "$(squeue -hn', slr_job$jobname, '2>/dev/null)"'),
         ignore.stderr = TRUE)
     if (queued) {
-        block_cmd <- sprintf('sbatch --nodes=1 --output=/dev/null --time=00:01:00 --dependency=singleton --job-name=%s --wait --wrap="hostname"', slr_job$jobname)
+        block_cmd <- sprintf('sbatch --nodes=1 --output=/dev/null --time=00:01:00  --mem=100M --dependency=singleton --job-name=%s --wait --wrap="hostname"', slr_job$jobname)
         system(block_cmd, intern=TRUE)
     }
     return()
